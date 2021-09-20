@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+// import { useReducer } from "react";
 import {
   UPDATE_PRODUCTS,
   ADD_TO_CART,
@@ -9,6 +9,7 @@ import {
   UPDATE_CURRENT_CATEGORY,
   CLEAR_CART,
   TOGGLE_CART,
+  INCREMENT,
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -80,11 +81,16 @@ export const reducer = (state, action) => {
         currentCategory: action.currentCategory,
       };
 
+    case INCREMENT:
+      return {
+        ...state,
+        counter: state.counter + 1,
+      };
     default:
       return state;
   }
 };
 
-export function useProductReducer(initialState) {
-  return useReducer(reducer, initialState);
-}
+// export function useProductReducer(initialState) {
+//   return useReducer(reducer, initialState);
+// }
