@@ -3,3 +3,15 @@ export const increment = () => {
     type: "INCREMENT",
   };
 };
+
+export const updateCategories = () => {
+  return {
+    type: "UPDATE_CATEGORIES",
+  };
+};
+
+export const updateCurrentCategory = () => {
+  return {
+    type: "UPDATE_CURRENT_CATEGORY",
+  };
+};
