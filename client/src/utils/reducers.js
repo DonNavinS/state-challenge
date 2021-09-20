@@ -9,7 +9,6 @@ import {
   UPDATE_CURRENT_CATEGORY,
   CLEAR_CART,
   TOGGLE_CART,
-  INCREMENT,
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -81,11 +80,6 @@ export const reducer = (state, action) => {
         currentCategory: action.currentCategory,
       };
 
-    case INCREMENT:
-      return {
-        ...state,
-        counter: state.counter + 1,
-      };
     default:
       return state;
   }

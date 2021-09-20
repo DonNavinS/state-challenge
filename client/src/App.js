@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
-import { useSelector, useDispatch } from "react-redux";
 import { createStore } from "redux";
 import { reducer } from "./utils/reducers";
 import { Provider } from "react-redux";
@@ -16,7 +15,6 @@ import Nav from "./components/Nav";
 // import { StoreProvider } from "./utils/GlobalState";
 import Success from "./pages/Success";
 import OrderHistory from "./pages/OrderHistory";
-import { INCREMENT } from "./utils/actions";
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -30,6 +28,7 @@ const client = new ApolloClient({
   uri: "/graphql",
 });
 
+// Create global state variable
 const globalState = {
   products: [],
   cart: [],
@@ -38,6 +37,8 @@ const globalState = {
   currentCategory: "",
   counter: 0,
 };
+
+// Creating store that will be accessible to all components rendered in App function
 const store = createStore(
   reducer,
   globalState,
@@ -45,19 +46,14 @@ const store = createStore(
 );
 
 function App() {
-  const counter = useSelector((state) => state.counter);
-  const dispatch = useDispatch();
   return (
     <ApolloProvider client={client}>
       <Router>
         <div>
+          {/* Provider component gives all children components access to store */}
           <Provider store={store}>
             <Nav />
             <Switch>
-              <div>
-                Counter {counter}
-                <button onClick={() => dispatch({ type: INCREMENT })}>+</button>
-              </div>
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
